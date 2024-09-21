@@ -1,4 +1,5 @@
-from typing import Union
+from datetime import datetime
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -55,6 +56,6 @@ def get_financial_profile(user_id: str):
         datetime.now()
     )
 
-    finalcial_profile_collection.insert_one(financial_profile)
+    financial_profile_collection.insert_one(financial_profile)
 
     return financial_profile
