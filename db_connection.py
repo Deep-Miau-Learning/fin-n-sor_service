@@ -1,15 +1,15 @@
 import os
 
 from pymongo import MongoClient
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
-load_dotenv()
+config = dotenv_values(".env")
 
-
-client = MongoClient(os.getenv("MONGO_URI"))
+client = MongoClient(config["MONGO_URI"])
 
 def get_db():
-    return client[os.getenv("MONGO_DB_NAME")]
+    return client[config["MONGO_DB_NAME"]]
+
 
 
 def get_collection(collection_name):
