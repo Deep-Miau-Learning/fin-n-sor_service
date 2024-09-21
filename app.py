@@ -15,13 +15,31 @@ def create_prompt_response(prompt_dto: PromptDto):
     prompt_collection = get_collection("prompt_response")
 
     prompt_response = {
-        "prompt": prompt_dto.prompt,
-        "response": "",
-        "created_at": datetime.now(),
-        "updated_at": datetime.now()
+        user_id: "",
+        prompt: prompt_dto.prompt,
+        response: "",
+        created_at: datetime.now(),
+        updated_at: datetime.now()
     }
 
     prompt_collection.insert_one(prompt_response)
 
     return {"response": ""}
 
+@app.get("/api/financial-profile/{user_id}")
+def get_financial_profile(user_id: str):
+    financial_profile_collection = get_collection("financial_profile")
+    prompt_response_collection = get_collection("prompt_response")
+
+    prompt_responses = prompt_response_collection.find({"user_id": user_id})
+
+    financial_profile = {
+        user_id: user_id,
+        output: "",
+        created_at: datetime.now(),
+        updates_at: datetime.now()
+    }
+
+    finalcial_profile_collection.insert_one(financial_profile)
+
+    return financial_profile
